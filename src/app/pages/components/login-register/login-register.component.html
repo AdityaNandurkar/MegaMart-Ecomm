@@ -1,0 +1,194 @@
+<div class="container loginContainer my-4" *ngIf="!isRegister">
+    <!--Data or Content-->
+    <div class="box-1">
+        <div class="content-holder p-5">
+            <h2 class="m-4">Login Form</h2>
+            <button class="button-1 p-3 mt-4 btn btn-dark" (click)="toggleForm()">SignUp</button>
+        </div>
+    </div>
+
+    <!--Forms-->
+    <div class="box-2 p-5">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <!-- EMAIL-ADDRESS details starts -->
+            <div class="mb-3">
+                <input type="text" class="form-control p-2" placeholder="Email" formControlName="email">
+                <div class="mt-2" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                    <div *ngIf="loginForm.controls['email'].errors?.['required']" class="alert alert-danger">
+                        Email is required.
+                    </div>
+                    <div *ngIf="loginForm.controls['email'].errors?.['email']" class="alert alert-warning">
+                        Please, enter a valid email address.
+                    </div>
+                </div>
+            </div>
+            <!-- EMAIL-ADDRESS details ends -->
+
+            <!-- PASSWORD details starts -->
+            <div class="mb-3">
+                <input type="password" class="form-control p-2" placeholder="Password" formControlName="password">
+                <div class="mt-2"
+                    *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                    <div *ngIf="loginForm.controls['password'].errors?.['required']" class="alert alert-danger">
+                        Password is required.
+                    </div>
+                    <div *ngIf="loginForm.controls['password'].errors?.['minlength']" class="alert alert-warning">
+                        Password must be at least 8 characters long.
+                    </div>
+                </div>
+            </div>
+            <!-- PASSWORD details ends -->
+
+            <button type="submit" class="btn btn-outline-success" [disabled]="loginForm.invalid">Login</button>
+        </form>
+    </div>
+</div>
+
+<div class="container registerContainer my-4" *ngIf="isRegister">
+    <!--Data or Content-->
+    <div class="box-1">
+        <div class="content-holder mt-5 p-5">
+            <h2 class="m-4">Signup Form</h2>
+            <button class="button-1 p-3 mt-4 btn btn-dark" (click)="toggleForm()">Login</button>
+        </div>
+    </div>
+
+    <!--Forms-->
+    <div class="box-2 px-5 pt-2">
+        <form [formGroup]="signupForm" (ngSubmit)="newUserSignUp()">
+            <!-- FULLNAME details starts -->
+            <div class="mb-3">
+                <input type="text" class="form-control p-2" placeholder="Full Name" formControlName="fullname">
+                <div class="mt-2"
+                    *ngIf="signupForm.controls['fullname'].touched && signupForm.controls['fullname'].invalid">
+                    <div *ngIf="signupForm.controls['fullname'].errors?.['required']" class="alert alert-danger">
+                        Full-Name is required.
+                    </div>
+                    <div *ngIf="signupForm.controls['fullname'].errors?.['maxlength']" class="alert alert-warning">
+                        Full-Name should be 20 characters or less.
+                    </div>
+                </div>
+            </div>
+            <!-- FULLNAME details ends -->
+
+            <!-- EMAIL-ADDRESS details starts -->
+            <div class="mb-3">
+                <input type="text" class="form-control p-2" placeholder="Email" formControlName="email">
+                <div class="mt-2" *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
+                    <div *ngIf="signupForm.controls['email'].errors?.['required']" class="alert alert-danger">
+                        Email is required.
+                    </div>
+                    <div *ngIf="signupForm.controls['email'].errors?.['email']" class="alert alert-warning">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+            </div>
+            <!-- EMAIL-ADDRESS details ends -->
+
+            <!-- PHONE/NUMBER details starts -->
+            <div class="mb-3">
+                <input type="text" class="form-control p-2" placeholder="Phone" formControlName="phone">
+                <div class="mt-2" *ngIf="signupForm.controls['phone'].touched && signupForm.controls['phone'].invalid">
+                    <div *ngIf="signupForm.controls['phone'].errors?.['required']" class="alert alert-danger">
+                        Phone No. is required.
+                    </div>
+                    <div *ngIf="signupForm.controls['phone'].errors?.['maxlength'] || signupForm.controls['phone'].errors?.['minlength']"
+                        class="alert alert-warning">
+                        Phone No. is not valid.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADDRESS details starts -->
+            <div class="mb-3">
+                <textarea name="address" class="form-control p-2" cols="30" rows="2" placeholder="Address"
+                    formControlName="address"></textarea>
+                <div class="mt-2"
+                    *ngIf="signupForm.controls['address'].touched && signupForm.controls['address'].invalid">
+                    <div *ngIf="signupForm.controls['address'].errors?.['required']" class="alert alert-danger">
+                        Address is Required !!
+                    </div>
+                </div>
+            </div>
+            <!-- ADDRESS details ends -->
+
+            <!-- PASSWORD details starts -->
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-control d-flex align-items-center justify-content-between">
+                        <input [type]="showNewPassword ? 'text' : 'password'" class="newPasswordInput" id="password"
+                            formControlName="password" placeholder="New Password" (input)="checkPasswordMatch()" />
+
+                        <!-- Eye icon to toggle password visibility -->
+                        <svg *ngIf="!showNewPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16"
+                            (click)="togglePasswordVisibility('new')" style="cursor: pointer;">
+                            <path
+                                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                            <path
+                                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                        </svg>
+
+                        <svg *ngIf="showNewPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"
+                            (click)="togglePasswordVisibility('new')" style="cursor: pointer;">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path
+                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                    </div>
+                    <div class="mt-2"
+                        *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
+                        <div *ngIf="signupForm.controls['password'].errors?.['required']" class="alert alert-danger">
+                            Password is required.
+                        </div>
+                        <div *ngIf="signupForm.controls['password'].errors?.['minlength']" class="alert alert-warning">
+                            Password must be at least 8 characters long.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-control d-flex align-items-center justify-content-between">
+                        <input [type]="showConfirmPassword ? 'text' : 'password'" class="newPasswordInput"
+                            id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm New Password"
+                            (input)="checkPasswordMatch()" />
+
+                        <!-- Eye icon to toggle password visibility -->
+                        <svg *ngIf="!showConfirmPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16"
+                            (click)="togglePasswordVisibility('confirm')" style="cursor: pointer;">
+                            <path
+                                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                            <path
+                                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                        </svg>
+
+                        <svg *ngIf="showConfirmPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"
+                            (click)="togglePasswordVisibility('confirm')" style="cursor: pointer;">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path
+                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                    </div>
+                    <div class="mt-2"
+                        *ngIf="signupForm.controls['confirmPassword'].touched && signupForm.controls['confirmPassword'].invalid">
+                        <div *ngIf="signupForm.controls['confirmPassword'].errors?.['required']"
+                            class="alert alert-danger">
+                            Confirm Password is required.
+                        </div>
+                        <div *ngIf="signupForm.controls['confirmPassword'].errors?.['minlength']"
+                            class="alert alert-warning">
+                            Password must be at least 8 characters long.
+                        </div>
+                    </div>
+                    <p [style.color]="passwordMatchColor">{{ passwordMatchMessage }}</p>
+                </div>
+            </div>
+            <!-- PASSWORD details ends -->
+
+            <button type="submit" class="btn btn-outline-success mb-2" [disabled]="signupForm.invalid">Submit</button>
+        </form>
+    </div>
+</div>

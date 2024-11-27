@@ -1,0 +1,120 @@
+<div class="payment-container">
+    <div class="row">
+        <!-- Credit Card Payment Section -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Credit Card Payment</h3>
+
+            <!-- Card Payment Form -->
+            <form (ngSubmit)="processCardPayment()" class="card-form p-4 shadow-sm rounded">
+                <div class="form-group mb-3">
+                    <label for="cardNumber" class="form-label">Card Number</label>
+                    <input type="text" [(ngModel)]="cardNumber" name="cardNumber" id="cardNumber" maxlength="19"
+                        class="form-control" required placeholder="1234 5678 9012 3456" appFormatInput>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <input type="text" [(ngModel)]="expiryDate" name="expiryDate" id="expiryDate" maxlength="5"
+                            class="form-control" required placeholder="MM/YY" appFormatInput>
+                    </div>
+                    <div class="col-6">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="password" [(ngModel)]="cvv" name="cvv" id="cvv" maxlength="4" class="form-control"
+                            required placeholder="•••">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 py-2"
+                    (click)="selectMethod('card');open(content)">Pay Now</button>
+            </form>
+        </div>
+
+        <!-- UPI Payment Section -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">UPI Payment</h3>
+
+            <!-- UPI ID List -->
+            <div class="upi-id-list mb-3">
+                <label class="form-label">Select UPI ID</label>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let id of upiIds; let i = index">
+                        <div>
+                            <input type="radio" [(ngModel)]="selectedUpiId" [value]="id" name="upiIdSelection" />
+                            {{ id }}
+                        </div>
+                        <button (click)="removeUpiId(i)" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Add New UPI ID Section -->
+            <div *ngIf="addingNewUpi" class="form-group mb-3">
+                <label for="upiId" class="form-label">New UPI ID</label>
+                <input type="text" [(ngModel)]="upiId" name="upiId" id="upiId" class="form-control"
+                    placeholder="yourname@upi" required />
+                <button (click)="addNewUpiId()" class="btn btn-primary w-100 mt-2">Save UPI ID</button>
+            </div>
+
+            <!-- Button to Add New UPI ID -->
+            <button *ngIf="!addingNewUpi" (click)="addingNewUpi = true" class="btn btn-outline-primary w-100 mb-3">
+                Add New UPI ID
+            </button>
+
+            <!-- Pay Now Button -->
+            <button (click)="processUpiPayment(); selectMethod('upi');open(content)"
+                class="btn btn-success w-100 py-2">Pay
+                Now</button>
+        </div>
+    </div>
+
+    <!-- Payment Confirmation Modal -->
+    <div *ngIf="showConfirmation" class="modal-overlay">
+        <div class="modal-content p-4 shadow-sm rounded">
+            <h4>Confirm Payment</h4>
+            <p>Amount: {{ grandTotal | currency: 'INR' }}</p>
+            <button (click)="confirmPayment()" class="btn btn-success">Confirm</button>
+            <button (click)="showConfirmation = false" class="btn btn-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h4 class="modal-title" id="modal-basic-title">Confirm Payment</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h5>Amount to Pay:</h5>
+                    <p class="fs-4 fw-bold text-success">{{ grandTotal | currency: 'INR' }}</p>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button (click)="confirmPayment();c('Save click')" class="btn btn-success btn-lg">
+                        <i class="bi bi-check-circle"></i> Confirm
+                    </button>
+                    <button (click)="showConfirmation = false; d('Cancel click')" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- 
+
+Lowest Card Details:
+Card Number: 0000000000000000 (16 zeros)
+Expiry Date: 01/23 (January 2023)
+CVV: 100 (Lowest valid 3-digit CVV)
+
+
+Highest Card Details:
+Card Number: 9999999999999999 (16 nines)
+Expiry Date: 12/99 (December 2099)
+CVV: 9999 (Highest valid 4-digit CVV)
+-->

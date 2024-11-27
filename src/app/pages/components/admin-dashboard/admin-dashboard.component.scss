@@ -1,0 +1,44 @@
+.container-fluid {
+    padding: 5px 15px;
+
+    .profileCard {
+        margin: 10px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+
+        .userInfo {
+            h3 {
+                border-bottom: 2px solid rgb(97, 97, 97);
+            }
+        }
+    }
+
+    .profile-image-container {
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        height: 220px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .bi-plus {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #7a0000;
+            border: 1px solid #7a0000;
+            outline: 1px solid #7a0000;
+            border-radius: 50%;
+            font-size: 15px;
+            background-color: #ffca2c;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+}

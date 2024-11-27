@@ -1,0 +1,50 @@
+.cart {
+    height: 70vh;
+    margin: 20px;
+    padding: 20px;
+
+    .card-title {
+        font-size: 25px;
+        font-weight: 500;
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .center img {
+        text-decoration: none;
+        color: inherit;
+        border: none;
+        outline: none;
+        height: 162px;
+        width: 250px;
+    }
+
+    h4 {
+        font-weight: 400;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    h6 {
+        font-weight: 400;
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .btn-success {
+        margin-bottom: 20px;
+    }
+}
+
+.card-table {
+    .displayImg {
+        height: 150px;
+        width: 100px;
+    }
+}

@@ -1,0 +1,81 @@
+.container-fluid {
+    padding: 5px 15px;
+
+    .profileCard {
+        margin: 10px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+
+        .userInfo {
+            h3 {
+                border-bottom: 2px solid rgb(97, 97, 97);
+            }
+        }
+    }
+
+    .profile-image-container {
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        height: 220px;
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .bi-plus {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #7a0000;
+            border: 1px solid #7a0000;
+            outline: 1px solid #7a0000;
+            border-radius: 50%;
+            font-size: 15px;
+            background-color: #ffca2c;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
+.edit {
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+
+    .bi-pencil-square {
+        position: absolute;
+    }
+
+    .bi-pencil-square:hover {
+        color: #51ea46;
+    }
+}
+
+.table {
+    font-size: 14px;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    color: #007bff;
+}

@@ -1,0 +1,223 @@
+<!-- popup.component.html -->
+<form [formGroup]="updateUserDetails" (ngSubmit)="updateUserInfo()">
+    <h2 class="popup-title text-center" mat-dialog-title>Update User Details</h2>
+    <div mat-dialog-content class="container-fluid">
+        <div class="row">
+
+            <!-- Profile Image Upload Section -->
+            <div class="col-md-3 col-12 mb-3 d-flex flex-column align-items-center" (click)="triggerFileInput()">
+                <img src="{{ uploadImage? uploadImage  : userInfo?.profileImage}}" class="card-img img-thumbnail mb-2"
+                    alt="Profile Photo" style="cursor: pointer; max-width: 100%; height: auto;" />
+                <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
+            </div>
+
+            <div class="col-md-9 col-12">
+
+                <!-- Fullname and Email Fields -->
+                <div class="row">
+                    <!-- FULLNAME details starts -->
+                    <div class="col-md-6 col-12 mb-3">
+                        <input type="text" class="form-control p-2" placeholder="Full Name" formControlName="fullname">
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['fullname'].touched && updateUserDetails.controls['fullname'].invalid">
+                            <div *ngIf="updateUserDetails.controls['fullname'].errors?.['required']"
+                                class="alert alert-danger">
+                                Full-Name is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['fullname'].errors?.['maxlength']"
+                                class="alert alert-warning">
+                                Full-Name should be 20 characters or less.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FULLNAME details ends -->
+
+                    <!-- EMAIL-ADDRESS details starts -->
+                    <div class="col-md-6 col-12 mb-3">
+                        <input type="text" class="form-control p-2" placeholder="Email" formControlName="email">
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['email'].touched && updateUserDetails.controls['email'].invalid">
+                            <div *ngIf="updateUserDetails.controls['email'].errors?.['required']"
+                                class="alert alert-danger">
+                                Email is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['email'].errors?.['email']"
+                                class="alert alert-warning">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- EMAIL-ADDRESS details ends -->
+                </div>
+
+                <!-- Phone and Address Fields -->
+                <div class="row">
+                    <!-- PHONE/NUMBER details starts -->
+                    <div class="col-md-6 col-12 mb-3">
+                        <input type="text" class="form-control p-2" placeholder="Phone" formControlName="phone">
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['phone'].touched && updateUserDetails.controls['phone'].invalid">
+                            <div *ngIf="updateUserDetails.controls['phone'].errors?.['required']"
+                                class="alert alert-danger">
+                                Phone No. is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['phone'].errors?.['maxlength'] || updateUserDetails.controls['phone'].errors?.['minlength']"
+                                class="alert alert-warning">
+                                Phone No. is not valid.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PHONE/NUMBER details ends -->
+
+                    <!-- ADDRESS details starts -->
+                    <div class="col-md-6 col-12 mb-3">
+                        <textarea name="address" class="form-control p-2" cols="30" rows="1" placeholder="Address"
+                            formControlName="address"></textarea>
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['address'].touched && updateUserDetails.controls['address'].invalid">
+                            <div *ngIf="updateUserDetails.controls['address'].errors?.['required']"
+                                class="alert alert-danger">
+                                Address is Required !!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ADDRESS details ends -->
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <p>Do you want to change password?</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="changepassword" value="yes"
+                                id="yesChangePassword" (change)="onPasswordChangeSelection(true)">
+                            <label class="form-check-label" for="yesChangePassword">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="changepassword" value="no"
+                                id="noChangePassword" (change)="onPasswordChangeSelection(false)" checked>
+                            <label class="form-check-label" for="noChangePassword">No</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3" *ngIf="isPasswordChange">
+                        <label for="password" class="form-label">Old Password</label>
+                        <div class="form-control d-flex align-items-center justify-content-between">
+                            <input [type]="showOldPassword ? 'text' : 'password'" class="newPasswordInput" id="password"
+                                formControlName="password" placeholder="Old Password" />
+
+                            <!-- Eye icon to toggle password visibility -->
+                            <svg *ngIf="!showOldPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('old')" style="cursor: pointer;">
+                                <path
+                                    d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                                <path
+                                    d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                            </svg>
+
+                            <svg *ngIf="showOldPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('old')" style="cursor: pointer;">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
+                        </div>
+
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['password'].touched && updateUserDetails.controls['password'].invalid">
+                            <div *ngIf="updateUserDetails.controls['password'].errors?.['required']"
+                                class="alert alert-danger">
+                                Password is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['password'].errors?.['minlength']"
+                                class="alert alert-warning">
+                                Password must be at least 8 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Password Fields Section -->
+                <div *ngIf="isPasswordChange" class="row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="form-control d-flex align-items-center justify-content-between">
+                            <input [type]="showNewPassword ? 'text' : 'password'" class="newPasswordInput"
+                                id="newPassword" formControlName="newPassword" placeholder="New Password"
+                                [(ngModel)]="newPassword" (input)="checkPasswordMatch()" />
+
+                            <!-- Eye icon to toggle password visibility -->
+                            <svg *ngIf="!showNewPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('new')" style="cursor: pointer;">
+                                <path
+                                    d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                                <path
+                                    d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                            </svg>
+
+                            <svg *ngIf="showNewPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('new')" style="cursor: pointer;">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['newPassword'].touched && updateUserDetails.controls['newPassword'].invalid">
+                            <div *ngIf="updateUserDetails.controls['newPassword'].errors?.['required']"
+                                class="alert alert-danger">
+                                Password is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['newPassword'].errors?.['minlength']"
+                                class="alert alert-warning">
+                                Password must be at least 8 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="form-control d-flex align-items-center justify-content-between">
+                            <input [type]="showConfirmPassword ? 'text' : 'password'" class="newPasswordInput"
+                                id="confirmNewPassword" formControlName="confirmNewPassword"
+                                placeholder="Confirm New Password" [(ngModel)]="confirmNewPassword"
+                                (input)="checkPasswordMatch()" />
+
+                            <!-- Eye icon to toggle password visibility -->
+                            <svg *ngIf="!showConfirmPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('confirm')" style="cursor: pointer;">
+                                <path
+                                    d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                                <path
+                                    d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                            </svg>
+
+                            <svg *ngIf="showConfirmPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"
+                                (click)="togglePasswordVisibility('confirm')" style="cursor: pointer;">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="updateUserDetails.controls['confirmNewPassword'].touched && updateUserDetails.controls['confirmNewPassword'].invalid">
+                            <div *ngIf="updateUserDetails.controls['confirmNewPassword'].errors?.['required']"
+                                class="alert alert-danger">
+                                Password is required.
+                            </div>
+                            <div *ngIf="updateUserDetails.controls['confirmNewPassword'].errors?.['minlength']"
+                                class="alert alert-warning">
+                                Password must be at least 8 characters long.
+                            </div>
+                        </div>
+                        <p [style.color]="passwordMatchColor">{{ passwordMatchMessage }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success py-2 px-4 mx-2"
+            [disabled]="updateUserDetails.invalid">Submit</button>
+        <button type="button" class="btn btn-secondary py-2 px-4 mx-2" (click)="close()">Close</button>
+    </div>
+</form>

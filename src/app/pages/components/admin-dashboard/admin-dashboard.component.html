@@ -1,0 +1,38 @@
+<div class="container-fluid p-3">
+    <h1>All Users List</h1>
+    <div class="row profileCard p-3 mb-3" *ngFor="let user of usersList">
+        <div class="col-md-4 col-lg-3 p-0 d-flex justify-content-center">
+            <div class="profile-image-container">
+                <img src="{{ user?.profileImage ? user?.profileImage : profileImage}}" class="card-img"
+                    alt="Profile Photo" style="cursor: pointer;" />
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-9">
+            <div class="card-body">
+                <h2 class="card-title">{{user?.fullname}}</h2>
+                <p class="card-subtitle text-muted">{{user?.description ? '' : "Web Developer"}}</p>
+
+                <div class="row">
+                    <div class="col-sm-6 userInfo">
+                        <label>Email</label>
+                        <h3>{{user?.email}}</h3>
+                    </div>
+                    <div class="col-sm-6 userInfo">
+                        <label>Phone No</label>
+                        <h3>{{user?.phone}}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 userInfo">
+                        <label>Address</label>
+                        <h3>{{user?.address}}</h3>
+                    </div>
+                    <div class="col-sm-6 userInfo">
+                        <label>Password</label>
+                        <h3>{{user?.password}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

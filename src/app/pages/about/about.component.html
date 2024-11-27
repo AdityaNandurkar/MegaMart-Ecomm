@@ -1,0 +1,35 @@
+<div class="container about my-5">
+    <div class="text-center">
+        <h1 class="py-4 display-4 text-primary">{{ heading | titlecase }}</h1>
+    </div>
+    <h3 class="logo">
+        <a class="navbar-brand text-primary fw-bold" routerLink="/">
+            {{ companyName }}<span class="text-success">Mart</span>
+        </a>
+    </h3>
+    <p class="lead">{{ missionStatement }}</p>
+    <p class="lead">{{ stats }}</p>
+    <p class="lead">{{ revenueInfo }}</p>
+</div>
+
+<div class="container my-5">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h1 class="card-title text-center"><em>{{ developerName }}</em></h1>
+            <h3 class="text-center text-muted">{{ role }}</h3>
+            <p class="card-text mt-4">
+                I am {{ developerName }}, a {{ role }}. I have expertise in technologies such as
+                <strong>{{ expertise.join(', ') }}</strong>.
+            </p>
+            <h4 class="mt-4">Project: {{ projectName }}</h4>
+            <p class="mt-2">{{ projectDescription }}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let feature of projectFeatures">
+                    <strong class="text-dark">{{ feature.heading }} :</strong>
+                    {{ feature.description }}
+                </li>
+            </ul>
+            <p class="mt-4">{{ conclusion }}</p>
+        </div>
+    </div>
+</div>

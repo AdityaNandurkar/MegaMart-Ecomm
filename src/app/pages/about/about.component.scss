@@ -1,0 +1,60 @@
+.logo a {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.logo a:hover {
+    color: #0056b3;
+}
+
+.logo span {
+    color: #28a745;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .logo a {
+        font-size: 1.5rem;
+    }
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    text-decoration: underline overline;
+}
+
+.about>p {
+    font-size: 1.2rem;
+    /* Use responsive font size */
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.about h3 {
+    font-size: 1.75rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .about>p {
+        font-size: 1rem;
+    }
+
+    .about h3 {
+        font-size: 1.5rem;
+    }
+}
+
+.shadow-lg {
+    font-size: 1.2rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
