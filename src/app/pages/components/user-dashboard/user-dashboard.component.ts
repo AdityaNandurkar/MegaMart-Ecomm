@@ -43,19 +43,7 @@ export class UserDashboardComponent {
   triggerFileInput() {
     this.fileInput.nativeElement.click();
   }
-
-  // onFileSelected(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input && input.files && input.files.length > 0) {
-  //     const file = input.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.profileImage = e.target.result; // Update the profile image
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
-
+  
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input && input.files && input.files.length > 0) {

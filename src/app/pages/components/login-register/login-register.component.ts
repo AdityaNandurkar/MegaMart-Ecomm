@@ -150,17 +150,7 @@ export class LoginRegisterComponent implements OnInit {
       console.log("Error => ", error);
     })
   }
-
-  // Handles form field changes (placeholder function for any custom logic)
-  onChange(): void {
-    // Implement any change logic if required
-  }
-
-  // Adds selected offer (placeholder function for adding offer selection logic)
-  addOffer(selectedOffer: any): void {
-    // Implement add offer logic if required
-  }
-
+  
   // Form control values for the passwords
   password: string = '';
   confirmPassword: string = '';
