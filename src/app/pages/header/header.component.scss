@@ -1,65 +1,166 @@
+// .logo a {
+//     font-size: 1.8rem;
+//     text-decoration: none;
+//     color: #007bff;
+//     cursor: pointer;
+// }
+
+// .logo a:hover {
+//     color: #0056b3;
+// }
+
+// .logo span {
+//     color: #28a745;
+//     font-weight: bold;
+// }
+// .saticNavbar{
+
+// }
+// @media (max-width: 768px) {
+//     .logo a {
+//         font-size: 1.5rem;
+//     }
+// }
+
+// .navbar {
+//     background-color: rgb(197, 196, 196);
+
+//     #navbarContent {
+//         // height: 20px;
+//     }
+
+//     #navigation_btn {
+//         color: white;
+//         font-size: 15px;
+//         font-weight: 500;
+//     }
+
+//     #navigation_btn:hover {
+//         color: #13F00C;
+//         transition: .5s;
+//         border-radius: 13px;
+//         cursor: pointer;
+//     }
+
+//     .dropdown-menu_items:hover {
+//         background-color: #146A11;
+//         color: white;
+//         transition: .5s;
+//     }
+
+//     //AFTER LOGIN
+//     #drop_list:hover {
+//         background-color: #146A11;
+//         transition: .5s;
+//         color: white;
+//     }
+// }
+
+// .bi-person,
+// .bi-cart4 {
+//     height: 40px;
+//     width: 40px;
+//     color: white;
+//     cursor: pointer;
+// }
+
+// .bi-cart4 {
+//     position: absolute;
+// }
+
+// .rounded-pill {
+//     position: relative;
+//     top: -5px;
+//     left: 25px;
+//     font-size: 12px;
+// }
+
+// .searchBox {
+//     .searchInput {
+//         height: 35px;
+//     }
+
+//     .bi-search {
+//         color: black;
+//         margin-right: 5px;
+//     }
+// }
+
+// .badge {
+//     position: relative;
+//     bottom: 10px;
+// }
+
+// .bi-person-circle {
+//     color: #653804;
+//     cursor: pointer;
+// }
+
+
+
+
+/* Define Variables for Colors and Sizes */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #28a745;
+    --navbar-bg: rgb(98, 96, 96);
+    --dropdown-hover-bg: #146A11;
+    --icon-size: 40px;
+    --transition-duration: 0.5s;
+}
+
+/* Logo Styling */
 .logo a {
     font-size: 1.8rem;
     text-decoration: none;
-    color: #007bff;
+    color: var(--primary-color);
     cursor: pointer;
+    transition: color var(--transition-duration);
 }
 
 .logo a:hover {
-    color: #0056b3;
+    color: var(--primary-hover);
 }
 
 .logo span {
-    color: #28a745;
+    color: var(--secondary-color);
     font-weight: bold;
 }
 
-@media (max-width: 768px) {
-    .logo a {
-        font-size: 1.5rem;
-    }
-}
-
+/* Navbar Styling */
 .navbar {
     background-color: rgb(197, 196, 196);
-
-    #navbarContent {
-        // height: 20px;
-    }
-
-    #navigation_btn {
-        color: white;
-        font-size: 15px;
-        font-weight: 500;
-    }
-
-    #navigation_btn:hover {
-        color: #13F00C;
-        transition: .5s;
-        border-radius: 13px;
-        cursor: pointer;
-    }
-
-    .dropdown-menu_items:hover {
-        background-color: #146A11;
-        color: white;
-        transition: .5s;
-    }
-
-    //AFTER LOGIN
-    #drop_list:hover {
-        background-color: #146A11;
-        transition: .5s;
-        color: white;
-    }
 }
 
+#navigation_btn {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--transition-duration), border-radius var(--transition-duration);
+}
+
+#navigation_btn:hover {
+    color: var(--secondary-color);
+    border-radius: 13px;
+}
+
+.dropdown-menu_items:hover,
+#drop_list:hover {
+    background-color: var(--dropdown-hover-bg);
+    color: white;
+    transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+/* Icon Styling */
 .bi-person,
 .bi-cart4 {
     height: 40px;
     width: 40px;
     color: white;
     cursor: pointer;
+    transition: color var(--transition-duration);
 }
 
 .bi-cart4 {
@@ -73,23 +174,184 @@
     font-size: 12px;
 }
 
-.searchBox {
-    .searchInput {
-        height: 35px;
-    }
-
-    .bi-search {
-        color: black;
-        margin-right: 5px;
-    }
+/* Search Box Styling */
+.searchBox .searchInput {
+    height: 35px;
 }
 
+.searchBox .bi-search {
+    color: black;
+    margin-right: 5px;
+}
+
+/* Badge Styling */
 .badge {
     position: relative;
     bottom: 10px;
 }
 
+/* Profile Icon Styling */
 .bi-person-circle {
     color: #653804;
     cursor: pointer;
+    transition: color var(--transition-duration);
+}
+
+.bi-person-circle:hover {
+    color: var(--secondary-color);
+}
+
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .logo a {
+        font-size: 1rem;
+    }
+
+    .searchBox .searchInput {
+        height: 30px;
+    }
+
+    .searchBox .bi-search {
+        height: 15px;
+    }
+
+    .item-width {
+        width: 20%;
+        margin-left: 20px;
+    }
+
+    .search-div {
+        width: 55%;
+    }
+
+    .icon-div {
+        width: 20%;
+        padding: 0;
+    }
+
+    .profile {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .bi-person,
+    .bi-cart4 {
+        height: 25px;
+        width: 25px;
+    }
+}
+
+@media (min-width:481px) and (max-width:767px) {
+    .logo a {
+        font-size: 1.2rem;
+    }
+
+    .searchBox .searchInput {
+        height: 30px;
+    }
+
+    .searchBox .bi-search {
+        height: 18px;
+    }
+
+    .item-width {
+        width: 22%;
+        margin-left: 11px;
+    }
+
+    .search-div {
+        width: 55%;
+    }
+
+    .icon-div {
+        width: 20%;
+    }
+
+    .profile {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .bi-person,
+    .bi-cart4 {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (min-width:768px) and (max-width:991px) {
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+    .item-width {
+        width: 22%;
+        margin-left: 15px;
+    }
+
+    .searchBox .searchInput {
+        height: 35px;
+    }
+
+    .searchBox .bi-search {
+        height: 20px;
+    }
+
+    .search-div {
+        width: 55%;
+    }
+
+    .icon-div {
+        width: 20%;
+    }
+
+    .profile {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .bi-person,
+    .bi-cart4 {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+    .item-width {
+        width: 20%;
+        margin-left: 15px;
+    }
+
+    .search-div {
+        width: 55%;
+    }
+
+    .icon-div {
+        width: 20%;
+    }
+}
+
+@media (min-width:1200px) and (max-width:1919px) {
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+    .item-width {
+        width: 20%;
+        margin-left: 15px;
+    }
+
+    .search-div {
+        width: 55%;
+    }
+
+    .icon-div {
+        width: 20%;
+    }
 }

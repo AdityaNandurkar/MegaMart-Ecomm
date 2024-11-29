@@ -103,7 +103,6 @@ export class LoginRegisterComponent implements OnInit {
 
   // Stores user data in local storage
   private storeUserData(user: User): void {
-    debugger;
     localStorage.setItem('email', this.loginForm.value.email);
     localStorage.setItem('password', this.loginForm.value.password);
 
