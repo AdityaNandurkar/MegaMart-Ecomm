@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/service/api/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 import { NotificationService } from 'src/app/service/notify/notification.service';
 import { ProductService } from 'src/app/service/product/product.service';
 
@@ -14,10 +16,12 @@ export class ProductsListsComponent {
   categoryType: string = "";
   searchKey: string = "";
   @Input() category: string | undefined;
-  constructor(private apiService: ApiService, private _notify: NotificationService, private _productService: ProductService, private _router: Router) {
+  constructor(private apiService: ApiService, private _notify: NotificationService, private _productService: ProductService, private _router: Router, private loaderService: LoaderService,) {
 
   }
+  isLoading$!: Observable<boolean>;
   ngOnInit(): void {
+    this.isLoading$ = this.loaderService.loading$;
     this._productService.category.subscribe(data => {
       this.categoryType = data;
       this.getAllProducts();
@@ -30,11 +34,13 @@ export class ProductsListsComponent {
 
   getAllProducts() {
     this.apiService.getProducts().subscribe((res: any) => {
+      this.loaderService.show();
       if (res && res.length > 0) {
         if (res && res.length > 0) {
           this.allProducts = this.category
             ? res.filter((item: any) => item.category === this.category)
             : res;
+            this.loaderService.hide();
         }
         console.log("Products List ", this.allProducts)
       }
@@ -43,6 +49,7 @@ export class ProductsListsComponent {
       }
     }, (error) => {
       console.log("Error => ", error);
+      this.loaderService.hide();
     })
   }
   
