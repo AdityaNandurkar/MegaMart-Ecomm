@@ -43,7 +43,7 @@ export class ProductsListsComponent {
 
         }
         console.log("Products List ", this.allProducts)
-        // this.loaderService.hide();
+        this.loaderService.hide();
       }
       else {
         console.log("No Products Found...")
