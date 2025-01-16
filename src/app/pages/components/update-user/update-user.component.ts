@@ -33,7 +33,6 @@ export class UpdateUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userInfo = data.data;
-    console.log("The user Info ", this.userInfo);
   }
   ngOnInit(): void {
     this.initForms();
@@ -171,7 +170,6 @@ export class UpdateUserComponent implements OnInit {
 
           // this._api.updateEmailandPasswordById(userId, userData).subscribe((res: any) => {
           this._api.updateProductQuantityById(userId, userData).subscribe((res: any) => {
-            console.log("Data => ", res);
           }, (error: any) => {
             console.log("Error => ", error);
           })

@@ -33,24 +33,20 @@ export class ProductsListsComponent {
   }
 
   getAllProducts() {
+    this.loaderService.show();
     this.apiService.getProducts().subscribe((res: any) => {
-      this.loaderService.show();
       if (res && res.length > 0) {
         if (res && res.length > 0) {
           this.allProducts = this.category
             ? res.filter((item: any) => item.category === this.category)
             : res;
 
+          this.loaderService.hide();
         }
-        console.log("Products List ", this.allProducts)
-        this.loaderService.hide();
-      }
-      else {
-        console.log("No Products Found...")
       }
     }, (error) => {
       console.log("Error => ", error);
-      // this.loaderService.hide();
+      this.loaderService.hide();
     })
   }
 

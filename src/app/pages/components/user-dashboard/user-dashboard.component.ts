@@ -58,7 +58,6 @@ export class UserDashboardComponent {
     this.myData.profileImage = imgPath;
     this._api.updateUserById(this.myData.id, this.myData).subscribe((res: any) => {
       this._notify.showSuccess("Image Upload Sucessfully.");
-      console.log("Image Upload Sucessfully.");
     }, (error) => {
       console.log("Error => ", error);
     })
@@ -69,7 +68,6 @@ export class UserDashboardComponent {
       if (res) {
         this.purchaseHistory = res;
       }
-      console.log("History ", res);
     }, (error) => {
       console.log("Error => ", error);
     })
@@ -83,8 +81,6 @@ export class UserDashboardComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Dialog result:', result);
     });
   }
 }

@@ -18,7 +18,6 @@ export class ProductDetailsComponent {
     pId && this._api.getProductsById(pId).subscribe((res) => {
       if (res) {
         this.productDetail = res;
-        console.log("View Product ", this.productDetail);
       }
     })
   }

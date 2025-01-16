@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit {
 
   search(event: any) {
     this.productName = (event.target as HTMLInputElement).value;
-    console.log(this.productName);
     this._productService.search.next(this.productName);
   };
   loggedIn = () => localStorage.getItem('email') && localStorage.getItem('password');
