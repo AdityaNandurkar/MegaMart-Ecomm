@@ -40,19 +40,20 @@ export class ProductsListsComponent {
           this.allProducts = this.category
             ? res.filter((item: any) => item.category === this.category)
             : res;
-            this.loaderService.hide();
+
         }
         console.log("Products List ", this.allProducts)
+        // this.loaderService.hide();
       }
       else {
         console.log("No Products Found...")
       }
     }, (error) => {
       console.log("Error => ", error);
-      this.loaderService.hide();
+      // this.loaderService.hide();
     })
   }
-  
+
   addToCart(product: any) {
     const email = localStorage.getItem('email');
     const password = localStorage.getItem('password');
