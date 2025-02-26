@@ -12,16 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
-  // @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  // }
-
-  email = localStorage.getItem('email');
+ email = localStorage.getItem('email');
   password = localStorage.getItem('password');
 
   decareaseQuantity: number = 1;
@@ -187,8 +178,6 @@ export class CartComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Dialog result:', result);
     });
   }
 }

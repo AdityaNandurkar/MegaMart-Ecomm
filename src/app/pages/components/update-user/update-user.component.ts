@@ -33,7 +33,6 @@ export class UpdateUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userInfo = data.data;
-    console.log("The user Info ", this.userInfo);
   }
   ngOnInit(): void {
     this.initForms();
@@ -74,33 +73,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUserInfo() {
-    // if (this.updateUserDetails.valid) {
-    //   const userId = this.userInfo.id;
-    //   const userDetails = this.updateUserDetails.value;
-    //   if (userDetails.newPassword === '' || userDetails.confirmNewPassword === '') {
-    //     userDetails.newPassword = this.userInfo.newPassword;
-    //     userDetails.confirmNewPassword = this.userInfo.confirmNewPassword;
-    //   }
-
-    //   userDetails.password = userDetails.newPassword === '' ? this.userInfo.password : userDetails.newPassword;
-
-    //   if (userDetails.newPassword !== this.userInfo.password) {
-    //     userDetails.previousPassword = this.userInfo.password;
-    //   } else {
-    //     userDetails.previousPassword = this.userInfo.previousPassword;
-    //   }
-
-    //   localStorage.setItem('email', userDetails.email);
-    //   localStorage.setItem('password', userDetails.password);
-    //   this._api.updateUserById(userId, userDetails).subscribe((res: any) => {
-    //     this._nofify.showSuccess("Updated Sucessfully...");
-    //     this.close();
-    //   }, (error) => {
-    //     console.log("Error => ", error);
-    //   })
-    // }
-
-
     if (this.updateUserDetails.valid) {
       const userId = this.userInfo.id;
       const userDetails = { ...this.updateUserDetails.value };
@@ -198,7 +170,6 @@ export class UpdateUserComponent implements OnInit {
 
           // this._api.updateEmailandPasswordById(userId, userData).subscribe((res: any) => {
           this._api.updateProductQuantityById(userId, userData).subscribe((res: any) => {
-            console.log("Data => ", res);
           }, (error: any) => {
             console.log("Error => ", error);
           })

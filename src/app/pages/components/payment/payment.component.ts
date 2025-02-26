@@ -30,7 +30,6 @@ export class PaymentComponent {
     config.backdrop = 'static';
     config.keyboard = false;
     this.cartAllData = data.productHistory;
-    console.log("Grand Total => ", data);
     this.grandTotal = data.productHistory.amount_paid;
   }
 
@@ -41,7 +40,6 @@ export class PaymentComponent {
 
   // Function to process card payment
   processCardPayment() {
-    console.log('Card Details:', this.cardNumber, this.expiryDate, this.cvv);
     if (this.validateCardDetails()) {
       this.showConfirmation = true; // Show confirmation before processing
     } else {

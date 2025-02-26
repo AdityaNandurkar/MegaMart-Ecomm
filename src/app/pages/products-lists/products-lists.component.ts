@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/service/api/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 import { NotificationService } from 'src/app/service/notify/notification.service';
 import { ProductService } from 'src/app/service/product/product.service';
 
@@ -14,10 +16,12 @@ export class ProductsListsComponent {
   categoryType: string = "";
   searchKey: string = "";
   @Input() category: string | undefined;
-  constructor(private apiService: ApiService, private _notify: NotificationService, private _productService: ProductService, private _router: Router) {
+  constructor(private apiService: ApiService, private _notify: NotificationService, private _productService: ProductService, private _router: Router, private loaderService: LoaderService,) {
 
   }
+  isLoading$!: Observable<boolean>;
   ngOnInit(): void {
+    this.isLoading$ = this.loaderService.loading$;
     this._productService.category.subscribe(data => {
       this.categoryType = data;
       this.getAllProducts();
@@ -29,112 +33,22 @@ export class ProductsListsComponent {
   }
 
   getAllProducts() {
+    this.loaderService.show();
     this.apiService.getProducts().subscribe((res: any) => {
       if (res && res.length > 0) {
         if (res && res.length > 0) {
           this.allProducts = this.category
             ? res.filter((item: any) => item.category === this.category)
             : res;
+
+          this.loaderService.hide();
         }
-        console.log("Products List ", this.allProducts)
-      }
-      else {
-        console.log("No Products Found...")
       }
     }, (error) => {
       console.log("Error => ", error);
+      this.loaderService.hide();
     })
   }
-  // addToCart(product: any) {
-  //   const Data = {
-  //     email: localStorage.getItem('email'),
-  //     password: localStorage.getItem('password'),
-  //     product: []
-  //   }
-  //   this.apiService.getCartProducts().subscribe(
-  //     (res) => {
-  //       const existingProduct = res.find((p: any) => p.id === product.id);
-
-  //       if (existingProduct) {
-  //         existingProduct.quantity = existingProduct.quantity + 1;
-  //         this.apiService.updateProductQuantityById(existingProduct.id, existingProduct).subscribe(
-  //           (response: any) => {
-  //             this._notify.showSuccess('Product Quantity Updated');
-  //           },
-  //           (error) => {
-  //             console.log("Error => ", error);
-  //           }
-  //         );
-  //       } else {
-  //         product.quantity = 1;
-  //         Data.product.push(product)
-  //         this.apiService.addProductToCart(Data).subscribe(
-  //           (response: any) => {
-  //             console.log('Product added to cart:', response);
-  //             this._notify.showSuccess('Product added to cart successfully');
-  //           },
-  //           (error) => {
-  //             console.log("Error adding product to cart:", error);
-  //             this._notify.showError('Error adding product to cart');
-  //           }
-  //         );
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log("Error fetching cart products:", error);
-  //     }
-  //   );
-  // }
-
-  // addToCart(product: any) {
-  //   const email = localStorage.getItem('email');
-  //   const password = localStorage.getItem('password');
-  //   if (!email || !password) {
-  //     this._notify.showError('User not authenticated');
-  //     return;
-  //   }
-
-  //   // Fetch current cart products
-  //   this.apiService.getCartProducts().subscribe(
-  //     (res) => {
-  //       const cartData = {
-  //         email,
-  //         password,
-  //         product: res // Existing products in the cart
-  //       };
-  //       const existingProduct = cartData.product.find((p: any) => p.id === product.id);
-
-  //       if (existingProduct) {
-  //         existingProduct.quantity += 1;
-  //         this.apiService.updateProductQuantityById(existingProduct.id, existingProduct).subscribe(
-  //           (response: any) => {
-  //             this._notify.showSuccess('Product quantity updated');
-  //           },
-  //           (error) => {
-  //             console.error("Error updating product quantity:", error);
-  //             this._notify.showError('Failed to update product quantity');
-  //           }
-  //         );
-  //       } else {
-  //         product.quantity = 1;
-  //         cartData.product.push(product);
-  //         this.apiService.addProductToCart(cartData).subscribe(
-  //           (response: any) => {
-  //             this._notify.showSuccess('Product added to cart successfully');
-  //           },
-  //           (error) => {
-  //             console.error("Error adding product to cart:", error);
-  //             this._notify.showError('Error adding product to cart');
-  //           }
-  //         );
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error("Error fetching cart products:", error);
-  //       this._notify.showError('Error fetching cart data');
-  //     }
-  //   );
-  // }
 
   addToCart(product: any) {
     const email = localStorage.getItem('email');

@@ -43,19 +43,7 @@ export class UserDashboardComponent {
   triggerFileInput() {
     this.fileInput.nativeElement.click();
   }
-
-  // onFileSelected(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input && input.files && input.files.length > 0) {
-  //     const file = input.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.profileImage = e.target.result; // Update the profile image
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
-
+  
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input && input.files && input.files.length > 0) {
@@ -70,7 +58,6 @@ export class UserDashboardComponent {
     this.myData.profileImage = imgPath;
     this._api.updateUserById(this.myData.id, this.myData).subscribe((res: any) => {
       this._notify.showSuccess("Image Upload Sucessfully.");
-      console.log("Image Upload Sucessfully.");
     }, (error) => {
       console.log("Error => ", error);
     })
@@ -81,7 +68,6 @@ export class UserDashboardComponent {
       if (res) {
         this.purchaseHistory = res;
       }
-      console.log("History ", res);
     }, (error) => {
       console.log("Error => ", error);
     })
@@ -95,8 +81,6 @@ export class UserDashboardComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Dialog result:', result);
     });
   }
 }

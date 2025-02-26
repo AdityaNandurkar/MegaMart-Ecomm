@@ -31,6 +31,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PaymentComponent } from './pages/components/payment/payment.component';
 import { FormatInputDirective } from './directive/FormatInput/format-input.directive';
+import { LoderComponent } from './shared/loder/loder.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { FormatInputDirective } from './directive/FormatInput/format-input.direc
     ContactComponent,
     AboutComponent,
     PaymentComponent,
-    FormatInputDirective
+    FormatInputDirective,
+    LoderComponent
   ],
   imports: [
     BrowserModule,
