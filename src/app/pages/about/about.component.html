@@ -1,4 +1,4 @@
-<div class="container about my-5">
+<!-- <div class="container about my-5">
     <div class="text-center">
         <h1 class="py-4 display-4 text-primary">{{ heading | titlecase }}</h1>
     </div>
@@ -32,4 +32,19 @@
             <p class="mt-4">{{ conclusion }}</p>
         </div>
     </div>
+</div> -->
+
+
+<div class="container about my-5">
+    <div class="text-center">
+        <h1 class="py-4 display-4 text-primary">{{ heading | titlecase }}</h1>
+    </div>
+    <h3 class="logo">
+        <a class="navbar-brand text-primary fw-bold" routerLink="/">
+            {{ 'Mega' }}<span class="text-success">Mart</span>
+        </a>
+    </h3>
+    <p class="lead">{{ missionStatement }}</p>
+    <p class="lead">{{ stats }}</p>
+    <p class="lead">{{ revenueInfo }}</p>
 </div>
